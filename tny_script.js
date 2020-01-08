@@ -10,30 +10,38 @@
    Date: 1/6/19  
 
 */
+runClock();
 
+function runClock(){
 
-//Display the current date and time
-document.getElementById("dateNow").innerHTML="mm/dd/yyyy <br/> hh:mm:ss";
+   //Display the current date and time
+   var currentYear = new Date();
 
-//Display the time left until New Year's Eve
-document.getElementById("days").textContent = "DD";
-document.getElementById("hrs").textContent = "HH";
-document.getElementById("mins").textContent = "MM";
-document.getElementById("secs").textContent = "SS";
+   //changed today's date
+   var dateStr = currentYear.toDateString();
+   var timeStr = currentYear.toLocaleTimeString();
 
-var date = new Date("January 7, 2020 13:54:23");
+   document.getElementById("dateNow").innerHTML = dateStr + "</br>" + timeStr;
 
-var dateStr = date.toDateString();       // dateStr == 1/7/2020
-var timeStr = date.toLocaleTimeString(); // timeStr == 1:54:23 PM
+   //Display the time left until New Year's Eve
+   var newYear = new Date("January 1, 2021");
+   var nextYear = currentYear.getFullYear()+1;
+   newYear.setFullYear(nextYear);
 
-document.getElementById("dateNow").innerHTML = dateStr + "<br/>" + timeStr;
+   var daysLeft = (newYear - currentYear)/(1000*60*60*24);
+   var hrsLeft = (daysLeft - Math.floor(daysLeft))*24;
+   var minsLeft = (hrsLeft - Math.floor(hrsLeft))*60;
+   var secsLeft = (minsLeft - Math.floor(minsLeft))*60;
 
-var daysLeft = 365 - date.getDate();
-var hrsLeft = 24 - date.getHours();
-var minsLeft = 60 - date.getMinutes();
-var secsLeft = 60 - date.getSeconds();
+   document.getElementById("days").textContent = Math.floor(daysLeft);
+   document.getElementById("hrs").textContent = Math.floor(hrsLeft);
+   document.getElementById("mins").textContent = Math.floor(minsLeft);
+   document.getElementById("secs").textContent = Math.ceil(secsLeft);
+}
 
-document.getElementById("days").textContent = daysLeft;
-document.getElementById("hrs").textContent = hrsLeft;
-document.getElementById("mins").textContent = minsLeft;
-document.getElementById("secs").textContent = secsLeft;
+function distance(x1, y1, x2, y2){
+   var distance = Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
+   return distance;
+}
+
+console.log(distance(1,1,4,5));
