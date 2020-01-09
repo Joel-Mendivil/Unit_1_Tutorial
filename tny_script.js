@@ -11,6 +11,7 @@
 
 */
 runClock();
+setInterval("runClock()", 1000);
 
 function runClock(){
 
@@ -39,9 +40,18 @@ function runClock(){
    document.getElementById("secs").textContent = Math.ceil(secsLeft);
 }
 
-function distance(x1, y1, x2, y2){
-   var distance = Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
-   return distance;
+//create a function to solve for the area of the rectangle using random sizes
+
+function solver(){
+
+   var height = Math.ceil(Math.random()*10);
+   var length = Math.ceil(Math.random()*10);
+
+   var area = (Math.ceil(height * length));
+
+   //use concat. to tell the user the size of the ret and then the 
+   //area created by it
+   console.log ("The height is " + height + " and the length is " + length + ", therefore the area of the rectangle is " + area);
 }
 
-console.log(distance(1,1,4,5));
+setInterval("solver()", 1000);
